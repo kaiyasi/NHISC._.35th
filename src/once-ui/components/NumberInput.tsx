@@ -1,7 +1,9 @@
 "use client";
 
 import React, { forwardRef, useState } from "react";
-import { Input, Flex, IconButton } from ".";
+import { Input } from ".";
+import { Flex } from ".";
+import { IconButton } from ".";
 import styles from "./NumberInput.module.scss";
 import classNames from "classnames";
 

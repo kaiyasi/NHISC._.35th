@@ -9,14 +9,13 @@ import React, {
   ReactNode,
 } from "react";
 import classNames from "classnames";
-import { Column, Flex, Text } from ".";
+import { Flex, Text } from ".";
 import styles from "./Input.module.scss";
 import useDebounce from "../hooks/useDebounce";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
-  label?: string;
-  placeholder?: string;
+  label: string;
   height?: "s" | "m";
   error?: boolean;
   errorMessage?: ReactNode;
@@ -35,7 +34,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   style?: React.CSSProperties;
   hasPrefix?: ReactNode;
   hasSuffix?: ReactNode;
-  cursor?: undefined | "interactive";
+  labelAsPlaceholder?: boolean;
   validate?: (value: ReactNode) => ReactNode | null;
 }
 
@@ -44,7 +43,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     {
       id,
       label,
-      placeholder,
       height = "m",
       error = false,
       errorMessage,
@@ -54,11 +52,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       style,
       hasPrefix,
       hasSuffix,
+      labelAsPlaceholder = false,
       children,
       onFocus,
       onBlur,
       validate,
-      cursor,
       ...props
     },
     ref,
@@ -111,25 +109,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const displayError = validationError || errorMessage;
 
-    const inputClassNames = classNames(
-      styles.input,
-      "font-body",
-      "font-default",
-      "font-m",
-      cursor === "interactive" ? "cursor-interactive" : undefined,
-      {
-        [styles.filled]: isFilled,
-        [styles.focused]: isFocused,
-        [styles.withPrefix]: hasPrefix,
-        [styles.withSuffix]: hasSuffix,
-        [styles.placeholder]: placeholder,
-        [styles.hasChildren]: children,
-        [styles.error]: displayError && debouncedValue !== "",
-      },
-    );
+    const inputClassNames = classNames(styles.input, "font-body", "font-default", "font-m", {
+      [styles.filled]: isFilled,
+      [styles.focused]: isFocused,
+      [styles.withPrefix]: hasPrefix,
+      [styles.withSuffix]: hasSuffix,
+      [styles.labelAsPlaceholder]: labelAsPlaceholder,
+      [styles.hasChildren]: children,
+      [styles.error]: displayError && debouncedValue !== "",
+    });
 
     return (
-      <Column
+      <Flex
+        direction="column"
         gap="8"
         style={style}
         fillWidth
@@ -160,32 +152,32 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               {hasPrefix}
             </Flex>
           )}
-          <Column fillWidth>
+          <Flex fillWidth direction="column">
             <input
               {...props}
               ref={ref}
               id={id}
-              placeholder={placeholder}
+              placeholder={labelAsPlaceholder ? label : props.placeholder}
               onFocus={handleFocus}
               onBlur={handleBlur}
               className={inputClassNames}
               aria-describedby={displayError ? `${id}-error` : undefined}
               aria-invalid={!!displayError}
             />
-            {label && (
+            {!labelAsPlaceholder && (
               <Text
                 as="label"
                 variant="label-default-m"
                 htmlFor={id}
                 className={classNames(styles.label, styles.inputLabel, {
-                  [styles.floating]: isFocused || isFilled || placeholder,
+                  [styles.floating]: isFocused || isFilled,
                 })}
               >
                 {label}
               </Text>
             )}
             {children}
-          </Column>
+          </Flex>
           {hasSuffix && (
             <Flex paddingRight="12" className={styles.suffix} position="static">
               {hasSuffix}
@@ -200,17 +192,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           </Flex>
         )}
         {description && (
-          <Flex
-            paddingX="16"
-            fillWidth
-            id={`${id}-description`}
-            textVariant="body-default-s"
-            onBackground="neutral-weak"
-          >
-            {description}
+          <Flex paddingX="16">
+            <Text
+              as="span"
+              id={`${id}-description`}
+              variant="body-default-s"
+              onBackground="neutral-weak"
+            >
+              {description}
+            </Text>
           </Flex>
         )}
-      </Column>
+      </Flex>
     );
   },
 );

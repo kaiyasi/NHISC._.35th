@@ -1,7 +1,7 @@
 "use client";
 
 import React, { forwardRef, ReactNode } from "react";
-import { IconButton, Button, Icon, Flex, Text, Column } from ".";
+import { IconButton, Button, Icon, Flex, Text } from ".";
 
 interface FeedbackProps extends Omit<React.ComponentProps<typeof Flex>, "title"> {
   variant?: "info" | "danger" | "warning" | "success";
@@ -10,31 +10,29 @@ interface FeedbackProps extends Omit<React.ComponentProps<typeof Flex>, "title">
   description?: string;
   showCloseButton?: boolean;
   onClose?: () => void;
-  className?: string;
-  style?: React.CSSProperties;
+  actionButtonProps?: React.ComponentProps<typeof Button>;
   children?: ReactNode;
 }
 
 const variantIconMap: {
   [key in "info" | "danger" | "warning" | "success"]: string;
 } = {
-  info: "info",
-  danger: "danger",
-  warning: "warning",
-  success: "check",
+  info: "infoCircle",
+  danger: "errorCircle",
+  warning: "warningTriangle",
+  success: "checkCircle",
 };
 
 const Feedback = forwardRef<HTMLDivElement, FeedbackProps>(
   (
     {
       variant = "info",
-      icon = true,
+      icon,
       title,
       description,
       showCloseButton = false,
       onClose,
-      className,
-      style,
+      actionButtonProps,
       children,
       ...rest
     },
@@ -50,8 +48,6 @@ const Feedback = forwardRef<HTMLDivElement, FeedbackProps>(
         vertical="start"
         role="alert"
         aria-live="assertive"
-        className={className}
-        style={style}
         {...rest}
       >
         {icon && (
@@ -66,9 +62,9 @@ const Feedback = forwardRef<HTMLDivElement, FeedbackProps>(
             />
           </Flex>
         )}
-        <Column fillWidth padding="16" gap="24" vertical="center">
+        <Flex fillWidth padding="16" gap="24" vertical="center" direction="column">
           {(title || description) && (
-            <Column fillWidth gap="4">
+            <Flex direction="column" fillWidth gap="4">
               {title && (
                 <Flex fillWidth gap="16">
                   <Flex fillWidth paddingY="4">
@@ -95,14 +91,21 @@ const Feedback = forwardRef<HTMLDivElement, FeedbackProps>(
                 </Flex>
               )}
               {description && (
-                <Text variant="body-default-s" onBackground={`${variant}-strong`}>
-                  {description}
-                </Text>
+                <Flex fillWidth>
+                  <Text variant="body-default-s" onBackground={`${variant}-strong`}>
+                    {description}
+                  </Text>
+                </Flex>
               )}
-            </Column>
+            </Flex>
           )}
           {children}
-        </Column>
+          {actionButtonProps && (
+            <Flex paddingBottom="4" gap="8">
+              <Button {...actionButtonProps} />
+            </Flex>
+          )}
+        </Flex>
       </Flex>
     );
   },

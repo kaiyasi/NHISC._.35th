@@ -1,12 +1,11 @@
 "use client";
 
 import React, { forwardRef } from "react";
-import { Text, Column, IconButton, IconButtonProps, Row } from ".";
+import { Text, Flex, IconButton, IconButtonProps } from ".";
 
 interface InteractiveDetailsProps {
   label?: React.ReactNode;
   description?: React.ReactNode;
-  disabled?: boolean;
   iconButtonProps?: IconButtonProps;
   onClick: () => void;
   className?: string;
@@ -16,25 +15,25 @@ interface InteractiveDetailsProps {
 const InteractiveDetails: React.FC<InteractiveDetailsProps> = forwardRef<
   HTMLDivElement,
   InteractiveDetailsProps
->(({ label, description, iconButtonProps, onClick, className, id, disabled }, ref) => {
+>(({ label, description, iconButtonProps, onClick, className, id }, ref) => {
   return (
-    <Column ref={ref} cursor={disabled ? "not-allowed" : undefined} className={className} onClick={onClick} id={id}>
-      <Row gap="4" vertical="center">
-        <Text as="span" variant="label-default-m" onBackground={disabled ? "neutral-weak" : "neutral-strong"}>
+    <Flex ref={ref} direction="column" className={className} onClick={onClick} id={id}>
+      <Flex gap="4" vertical="center">
+        <Text as="span" variant="label-default-m" onBackground="neutral-strong">
           {label}
         </Text>
         {iconButtonProps?.tooltip && (
           <div onClick={(e) => e.stopPropagation()}>
-            <IconButton size="s" variant="ghost" icon="help" {...iconButtonProps} />
+            <IconButton size="s" variant="ghost" icon="helpCircle" {...iconButtonProps} />
           </div>
         )}
-      </Row>
+      </Flex>
       {description && (
         <Text as="span" variant="body-default-s" onBackground="neutral-weak">
           {description}
         </Text>
       )}
-    </Column>
+    </Flex>
   );
 });
 

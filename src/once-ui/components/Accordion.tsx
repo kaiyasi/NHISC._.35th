@@ -3,7 +3,6 @@
 import React, { useState, forwardRef, useImperativeHandle, useEffect, useCallback } from "react";
 import { Flex, Icon, Text, Column, Grid } from ".";
 import styles from "./Accordion.module.scss";
-import classNames from "classnames";
 
 export interface AccordionHandle extends HTMLDivElement {
   toggle: () => void;
@@ -17,10 +16,8 @@ interface AccordionProps extends Omit<React.ComponentProps<typeof Flex>, "title"
   icon?: string;
   iconRotation?: number;
   size?: "s" | "m" | "l";
-  radius?: "xs" | "s" | "m" | "l" | "xl" | "full";
+  radius?: "xs" | "s" | "m" | "l" | "full";
   open?: boolean;
-  className?: string;
-  style?: React.CSSProperties;
 }
 
 const Accordion = forwardRef<AccordionHandle, AccordionProps>(
@@ -33,8 +30,6 @@ const Accordion = forwardRef<AccordionHandle, AccordionProps>(
       radius,
       icon = "chevronDown",
       size = "m",
-      className,
-      style,
       ...rest
     },
     ref,
@@ -64,11 +59,10 @@ const Accordion = forwardRef<AccordionHandle, AccordionProps>(
     );
 
     return (
-      <Column fillWidth>
+      <Column fillWidth className={styles.border}>
         <Flex
           tabIndex={0}
-          className={classNames(styles.accordion, className)}
-          style={style}
+          className={styles.accordion}
           cursor="pointer"
           transition="macro-medium"
           paddingY={size === "s" ? "8" : size === "m" ? "12" : "16"}
@@ -110,7 +104,7 @@ const Accordion = forwardRef<AccordionHandle, AccordionProps>(
           aria-hidden={!isOpen}
         >
           <Flex fillWidth minHeight={0} overflow="hidden">
-            <Column fillWidth paddingX={size === "s" ? "12" : size === "m" ? "16" : "20"} paddingTop="8" paddingBottom="16" {...rest}>
+            <Column fillWidth paddingX="20" paddingTop="8" paddingBottom="16" {...rest}>
               {children}
             </Column>
           </Flex>

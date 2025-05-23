@@ -15,8 +15,7 @@ import useDebounce from "../hooks/useDebounce";
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   id: string;
-  label?: string;
-  placeholder?: string;
+  label: string;
   lines?: number | "auto";
   error?: boolean;
   errorMessage?: ReactNode;
@@ -34,6 +33,7 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string;
   hasPrefix?: ReactNode;
   hasSuffix?: ReactNode;
+  labelAsPlaceholder?: boolean;
   resize?: "horizontal" | "vertical" | "both" | "none";
   validate?: (value: ReactNode) => ReactNode | null;
 }
@@ -43,7 +43,6 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     {
       id,
       label,
-      placeholder,
       lines = 3,
       error = false,
       errorMessage,
@@ -52,6 +51,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       className,
       hasPrefix,
       hasSuffix,
+      labelAsPlaceholder = false,
       resize = "vertical",
       validate,
       children,
@@ -136,7 +136,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         [styles.focused]: isFocused,
         [styles.withPrefix]: hasPrefix,
         [styles.withSuffix]: hasSuffix,
-        [styles.placeholder]: placeholder,
+        [styles.labelAsPlaceholder]: labelAsPlaceholder,
         [styles.hasChildren]: children,
       },
     );
@@ -152,7 +152,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         })}
       >
         <Flex
-          minHeight={placeholder ? "48" : "56"}
+          minHeight="56"
           transition="micro-medium"
           border="neutral-medium"
           background="neutral-alpha-weak"
@@ -160,7 +160,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           vertical="stretch"
           className={classNames(
             styles.base,
-            lines !== "auto" && resize !== "none" && styles.textareaBase,
+            lines !== "auto" && styles.textareaBase,
             radius === "none" ? "radius-none" : radius ? `radius-l-${radius}` : "radius-l",
           )}
         >
@@ -183,7 +183,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               }}
               id={id}
               rows={typeof lines === "number" ? lines : 1}
-              placeholder={placeholder}
+              placeholder={labelAsPlaceholder ? label : props.placeholder}
               onFocus={handleFocus}
               onBlur={handleBlur}
               className={textareaClassNames}
@@ -196,7 +196,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               }}
               onChange={handleChange}
             />
-            {!placeholder && (
+            {!labelAsPlaceholder && (
               <Text
                 as="label"
                 variant="label-default-m"
@@ -208,7 +208,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                 {label}
               </Text>
             )}
-            {children}
+            {children && children}
           </Flex>
           {hasSuffix && (
             <Flex paddingRight="12" className={styles.suffix}>

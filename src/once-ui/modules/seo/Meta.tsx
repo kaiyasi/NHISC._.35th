@@ -1,9 +1,4 @@
-import type { Metadata as NextMetadata } from "next";
-
-export interface Alternate {
-  href: string;
-  hrefLang: string;
-}
+import { Metadata as NextMetadata } from "next";
 
 export interface MetaProps {
   title: string;
@@ -17,11 +12,6 @@ export interface MetaProps {
     name: string;
     url?: string;
   };
-  canonical?: string;
-  robots?: string;
-  noindex?: boolean;
-  nofollow?: boolean;
-  alternates?: Alternate[];
 }
 
 export function generateMetadata({
@@ -33,29 +23,21 @@ export function generateMetadata({
   image,
   publishedTime,
   author,
-  canonical,
-  robots,
-  noindex,
-  nofollow,
-  alternates,
 }: MetaProps): NextMetadata {
   const normalizedBaseURL = baseURL.endsWith("/") ? baseURL.slice(0, -1) : baseURL;
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
 
+  const isFullUrl = (url: string) => /^https?:\/\//.test(url);
+
   const ogImage = image
-    ? `${image.startsWith("/") ? image : `/${image}`}`
-    : `/og?title=${encodeURIComponent(title)}`;
+    ? isFullUrl(image)
+      ? image
+      : `${normalizedBaseURL}${image.startsWith("/") ? image : `/${image}`}`
+    : `${normalizedBaseURL}/og?title=${encodeURIComponent(title)}`;
 
-  const url = canonical || `${normalizedBaseURL}${normalizedPath}`;
-
-  let robotsContent = robots;
-  if (!robotsContent && (noindex || nofollow)) {
-    robotsContent = `${noindex ? "noindex" : "index"},${nofollow ? "nofollow" : "follow"}`;
-  }
-
+  const url = `${normalizedBaseURL}${normalizedPath}`;
 
   return {
-    metadataBase: new URL(normalizedBaseURL.startsWith('https://') ? normalizedBaseURL : `https://${normalizedBaseURL}`),
     title,
     description,
     openGraph: {
@@ -78,17 +60,6 @@ export function generateMetadata({
       images: [ogImage],
     },
     ...(author ? { authors: [{ name: author.name, url: author.url }] } : {}),
-    ...(robotsContent ? { robots: robotsContent } : {}),
-    ...(alternates?.length
-      ? {
-          alternates: {
-            canonical: url,
-            languages: Object.fromEntries(
-              alternates.map((alt) => [alt.hrefLang, alt.href])
-            ),
-          },
-        }
-      : {}),
   };
 }
 

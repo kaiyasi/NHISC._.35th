@@ -2,8 +2,10 @@
 
 import React, { useState, useRef, useEffect, forwardRef, ReactNode } from "react";
 import classNames from "classnames";
-import { DropdownWrapper, Flex, Icon, IconButton, Input, InputProps, Option, OptionProps, DropdownWrapperProps } from ".";
+import { DropdownWrapper, Flex, Icon, IconButton, Input, InputProps, Option } from ".";
 import inputStyles from "./Input.module.scss";
+import type { OptionProps } from "./Option";
+import type { DropdownWrapperProps } from "./DropdownWrapper";
 import { Placement } from "@floating-ui/react-dom";
 
 type SelectOptionType = Omit<OptionProps, "selected">;
@@ -121,8 +123,6 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
       }
     };
 
-    const selectedOption = options.find((opt) => opt.value === value);
-
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
         if (
@@ -168,12 +168,11 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
               textOverflow: "ellipsis",
               ...style,
             }}
-            cursor="interactive"
-            value={typeof selectedOption?.label === "string" ? selectedOption.label : ""}
+            value={value}
             onFocus={handleFocus}
             onKeyDown={handleKeyDown}
             readOnly
-            className={classNames("fill-width", {
+            className={classNames("cursor-interactive", "fill-width", {
               [inputStyles.filled]: isFilled,
               [inputStyles.focused]: isFocused,
               className,
@@ -193,8 +192,9 @@ const Select = forwardRef<HTMLDivElement, SelectProps>(
                     marginLeft: "-1px",
                     width: "calc(100% + 2px)",
                   }}
+                  labelAsPlaceholder
                   id="search"
-                  placeholder="Search"
+                  label="Search"
                   height="s"
                   radius="none"
                   hasSuffix={

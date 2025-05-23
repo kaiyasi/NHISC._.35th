@@ -1,68 +1,94 @@
-# Once UI for Next.js
+# **Magic Portfolio by Once UI**
 
-A design system for indie builders who move fast and break limits without neglecting quality.
+View the [demo here](https://demo.magic-portfolio.com).
+
+![Magic Portfolio](https://demo.magic-portfolio.com/images/og/home.jpg)
 
 
-![Once UI](public/images/og/home.jpg)
+# **Getting started**
 
-# Features
+Magic Portfolio was built with [Once UI](https://once-ui.com) for [Next.js](https://nextjs.org). It requires Node.js v18.17+.
 
-Start building your Next.js app in minutes with: 
-* **A robust token and style system** that simplifies customization and ensures consistency. 
-* **A copy-and-paste component library** that integrates seamlessly into your project.
-* **Interactive documentation** to apply your branding and set component properties.
-
-# Demo
-[demo.once-ui.com](https://demo.once-ui.com)
-
-![Once UI](public/images/demo.png)
-
-# Getting started
-Clone the starter template from GitHub.
-```bash
-git clone https://github.com/once-ui-system/nextjs-starter.git
+**1. Clone the repository**
+```
+git clone https://github.com/once-ui-system/magic-portfolio.git
 ```
 
-You can also deploy it directly to Vercel.
+**2. Install dependencies**
+```
+npm install
+```
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fonce-ui-system%2Fnextjs-starter&redirect-url=https%3A%2F%2Fonce-ui.com%2Fdocs%2F)
+**3. Run dev server**
+```
+npm run dev
+```
 
+**4. Edit config**
+```
+src/app/resources/config
+```
 
-View the step-by-step guide at [once-ui.com/docs](https://once-ui.com/docs).
+**5. Edit content**
+```
+src/app/resources/content
+```
 
-# Documentation
-[once-ui.com/docs](https://once-ui.com/docs)
+**6. Create blog posts / projects**
+```
+Add a new .mdx file to src/app/blog/posts or src/app/work/projects
+```
 
-# Authors
-Connect with us!
+# **Documentation**
 
-Lorant One: [Site](https://lorant.one), [Threads](https://www.threads.net/@lorant.one), [LinkedIn](https://www.linkedin.com/in/lorant-one/)  
-Zsofia Komaromi: [Site](https://zsofia.pro), [Threads](https://www.threads.net/@zsofia_kom), [LinkedIn](https://www.linkedin.com/in/zsofiakomaromi/)
+Docs available at: [docs.once-ui.com](https://docs.once-ui.com/docs/magic-portfolio/quick-start)
 
-# Get involved
-- Join the [Design Engineers Club](https://discord.com/invite/5EyAQ4eNdS) on Discord to connect with designers, developers and share your projects.
-- Report a [bug](https://github.com/once-ui-system/nextjs-starter/issues/new?labels=bug&template=bug_report.md).
-- Submit a [feature request](https://github.com/once-ui-system/nextjs-starter/issues/new?labels=feature%20request&template=feature_request.md).
+# **Features**
 
-# License
+## **Once UI**
+- All tokens, components & features of [Once UI](https://once-ui.com)
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+## **SEO**
+- Automatic open-graph and X image generation with next/og
+- Automatic schema and metadata generation based on the content file
 
-# Sponsors
+## **Design**
+- Responsive layout optimized for all screen sizes
+- Timeless design without heavy animations and motion
+- Endless customization options through [data attributes](https://once-ui.com/docs/theming)
 
-[github.com/sponsors/once-ui-system](https://github.com/sponsors/once-ui-system)
+## **Content**
+- Render sections conditionally based on the content file
+- Enable or disable pages for blog, work, gallery and about / CV
+- Generate and display social links automatically
+- Set up password protection for URLs
 
-Become a sponsor and help us continue to develop and maintain this project.
+## **Localization**
+- A localized version of Magic Portfolio is available with the next-intl library
+- To use localization, switch to the 'i18n' branch
 
-# Once UI for Figma
+# **Authors**
 
-Once UI is also available for Figma.  
-Design and prototype entire products from scratch in hours. Use the same tokens and components as the Next.js design system.
+Connect with us on Threads or LinkedIn.
 
-Start designing: [once-ui.com/figma](https://once-ui.com/figma)
+Lorant Toth: [Threads](https://www.threads.net/@lorant.one), [LinkedIn](https://www.linkedin.com/in/tothlorant/)  
+Zsofia Komaromi: [Threads](https://www.threads.net/@zsofia_kom), [LinkedIn](https://www.linkedin.com/in/zsofiakomaromi/)
 
-# Once UI Pro
+Localization added by [François Hernandez](https://github.com/francoishernandez)
 
-Take your project further with Once UI Pro. Get access to complete templates, fully designed pages, and modular blocks that make building apps even faster.
+# **Get involved**
 
-Explore Pro: [once-ui.com/pro](https://once-ui.com/pro)
+- Join the [Design Engineers Club on Discord](https://discord.com/invite/5EyAQ4eNdS) and share your portfolio with us!
+- Report a [bug](https://github.com/once-ui-system/magic-portfolio/issues/new?labels=bug&template=bug_report.md).
+
+# **License**
+
+Distributed under the CC BY-NC 4.0 License.
+- Commercial usage is not allowed.
+- Attribution is required.
+- You can extend the license to commercial use by purchasing a [Once UI Pro](https://once-ui.com/pricing) license.
+
+See `LICENSE.txt` for more information.
+
+# **Deploy with Vercel**
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fonce-ui-system%2Fmagic-portfolio&project-name=portfolio&repository-name=portfolio&redirect-url=https%3A%2F%2Fgithub.com%2Fonce-ui-system%2Fmagic-portfolio&demo-title=Magic%20Portfolio&demo-description=Showcase%20your%20designers%20or%20developer%20portfolio&demo-url=https%3A%2F%2Fdemo.magic-portfolio.com&demo-image=%2F%2Fraw.githubusercontent.com%2Fonce-ui-system%2Fmagic-portfolio%2Fmain%2Fpublic%2Fimages%2Fog%2Fhome.jpg)

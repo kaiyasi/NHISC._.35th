@@ -1,8 +1,7 @@
 import React, { forwardRef } from "react";
 
 import styles from "./Spinner.module.scss";
-import { Flex } from ".";
-import classNames from "classnames";
+import { Flex } from "./Flex";
 
 interface SpinnerProps extends React.ComponentProps<typeof Flex> {
   size?: "xs" | "s" | "m" | "l" | "xl";
@@ -14,18 +13,16 @@ interface SpinnerProps extends React.ComponentProps<typeof Flex> {
 const Spinner = forwardRef<HTMLDivElement, SpinnerProps>(
   ({ size = "m", ariaLabel = "Loading", className, style, ...rest }, ref) => {
     return (
-      <Flex center style={style} className={className} {...rest}>
+      <Flex horizontal="center" vertical="center" style={style} className={className} {...rest}>
         <Flex
           ref={ref}
-          center
+          horizontal="center"
+          vertical="center"
           className={styles[size]}
           role="status"
           aria-label={ariaLabel}
         >
-          <Flex fill>
-            <Flex className={classNames(styles.size)} borderStyle="solid" fill radius="full" border="neutral-alpha-medium" position="absolute"/>
-            <Flex className={classNames(styles.spinner, styles.size)} borderStyle="solid" fill radius="full"/>
-          </Flex>
+          <div className={styles.spinner} />
         </Flex>
       </Flex>
     );

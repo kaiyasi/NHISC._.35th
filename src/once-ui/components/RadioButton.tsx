@@ -82,7 +82,6 @@ const RadioButton: React.FC<RadioButtonProps> = forwardRef<HTMLInputElement, Rad
           onClick={toggleItem}
           onKeyDown={handleKeyDown}
           tabIndex={disabled ? -1 : 0}
-          cursor={disabled ? "not-allowed" : undefined}
           className={classNames(styles.element, {
             [styles.checked]: controlledIsChecked !== undefined ? controlledIsChecked : isChecked,
             [styles.disabled]: disabled,
@@ -100,7 +99,7 @@ const RadioButton: React.FC<RadioButtonProps> = forwardRef<HTMLInputElement, Rad
             />
           )}
         </Flex>
-        {props.label && <InteractiveDetails disabled={disabled} id={radioId} {...props} onClick={toggleItem} />}
+        {props.label && <InteractiveDetails id={radioId} {...props} onClick={toggleItem} />}
       </Flex>
     );
   },

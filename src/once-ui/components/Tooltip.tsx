@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { Flex, Icon } from ".";
 import { IconName } from "../icons";
 
-interface TooltipProps extends React.ComponentProps<typeof Flex> {
+type TooltipProps = {
   label: ReactNode;
   prefixIcon?: IconName;
   suffixIcon?: IconName;
@@ -15,7 +15,7 @@ interface TooltipProps extends React.ComponentProps<typeof Flex> {
 };
 
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
-  ({ label, prefixIcon, suffixIcon, className, style, ...flex }, ref) => {
+  ({ label, prefixIcon, suffixIcon, className, style }, ref) => {
     return (
       <Flex
         hide="m"
@@ -35,7 +35,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         border="neutral-medium"
         role="tooltip"
         className={classNames(className)}
-        {...flex}
       >
         {prefixIcon && <Icon name={prefixIcon} size="xs" />}
         <Flex
@@ -49,7 +48,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         {suffixIcon && <Icon name={suffixIcon} size="xs" />}
       </Flex>
     );
-  },
+  }
 );
 
 Tooltip.displayName = "Tooltip";

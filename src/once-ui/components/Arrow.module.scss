@@ -8,6 +8,7 @@
 .arrowHead {
     transition: var(--transition-micro-medium);
     width: var(--static-space-0);
+    transition-delay: 0.2s;
     right: 0;
     transform-origin: right center;
     transform: rotate(0);
@@ -17,15 +18,19 @@
     width: var(--static-space-16);
     visibility: visible;
 
+    .arrow {
+        width: var(--static-space-12);
+    }
+
     .arrowHead {
         width: var(--static-space-8);
     }
 
-    .arrowHead:nth-child(1) {
+    .arrowHead:nth-child(2) {
         transform: rotate(45deg);
     }
 
-    .arrowHead:nth-child(2) {
+    .arrowHead:nth-child(3) {
         transform: rotate(-45deg);
     }
 }

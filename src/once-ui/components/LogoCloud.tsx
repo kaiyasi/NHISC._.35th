@@ -2,9 +2,11 @@
 
 import React, { forwardRef, useState, useEffect } from "react";
 import classNames from "classnames";
-import { Grid, Flex, Logo } from ".";
+import { Grid } from "./Grid";
+import { Logo } from "./Logo";
 import styles from "./LogoCloud.module.scss";
 import type { ComponentProps } from "react";
+import { Flex } from "./Flex";
 
 type LogoProps = ComponentProps<typeof Logo>;
 
@@ -23,10 +25,9 @@ const LogoCloud = forwardRef<HTMLDivElement, LogoCloudProps>(
   ({ logos, className, style, limit = 6, rotationInterval = ANIMATION_DURATION, ...rest }, ref) => {
     const [visibleLogos, setVisibleLogos] = useState<LogoProps[]>(() => logos.slice(0, limit));
     const [key, setKey] = useState(0);
-    const shouldRotate = logos.length > limit;
 
     useEffect(() => {
-      if (!shouldRotate) {
+      if (logos.length <= limit) {
         setVisibleLogos(logos);
         return;
       }
@@ -49,7 +50,7 @@ const LogoCloud = forwardRef<HTMLDivElement, LogoCloudProps>(
       );
 
       return () => clearInterval(interval);
-    }, [logos, limit, rotationInterval, shouldRotate]);
+    }, [logos, limit, rotationInterval]);
 
     return (
       <Grid ref={ref} className={classNames(styles.container, className)} style={style} {...rest}>
@@ -63,7 +64,7 @@ const LogoCloud = forwardRef<HTMLDivElement, LogoCloudProps>(
             radius="l"
           >
             <Logo
-              className={shouldRotate ? styles.logo : styles.staticLogo}
+              className={styles.logo}
               style={{
                 ...logo.style,
                 animationDelay: `${index * STAGGER_DELAY}ms`,

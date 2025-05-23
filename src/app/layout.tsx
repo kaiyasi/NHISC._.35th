@@ -3,46 +3,42 @@ import "@/once-ui/tokens/index.scss";
 
 import classNames from "classnames";
 
-import { baseURL, style, meta, font, effects } from "@/app/resources/once-ui.config";
-import { Background, Column, Flex, ToastProvider, ThemeProvider } from "@/once-ui/components";
+import { Footer, Header, RouteGuard } from "@/components";
+import { baseURL, effects, style, font, home } from "@/app/resources";
 
+import { Background, Column, Flex, ThemeProvider, ToastProvider } from "@/once-ui/components";
 import { opacity, SpacingToken } from "@/once-ui/types";
-import { Meta, Schema } from "@/once-ui/modules";
+import { Meta } from "@/once-ui/modules";
 
 export async function generateMetadata() {
   return Meta.generate({
-    title: meta.home.title,
-    description: meta.home.description,
+    title: home.title,
+    description: home.description,
     baseURL: baseURL,
-    path: meta.home.path,
-    canonical: meta.home.canonical,
-    image: meta.home.image,
-    robots: meta.home.robots,
-    alternates: meta.home.alternates,
+    path: home.path,
+    image: home.image,
   });
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+}
+
+export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <Flex
       suppressHydrationWarning
       as="html"
       lang="en"
-      fillHeight
       background="page"
       data-neutral={style.neutral}
       data-brand={style.brand}
       data-accent={style.accent}
-      data-border={style.border}
       data-solid={style.solid}
       data-solid-style={style.solidStyle}
+      data-border={style.border}
       data-surface={style.surface}
       data-transition={style.transition}
-      data-scaling={style.scaling}
       className={classNames(
         font.primary.variable,
         font.secondary.variable,
@@ -50,16 +46,8 @@ export default function RootLayout({
         font.code.variable,
       )}
     >
-      <Schema
-        as="webPage"
-        baseURL={baseURL}
-        title={meta.home.title}
-        description={meta.home.description}
-        path={meta.home.path}
-      />
       <head>
         <script
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: <It's not dynamic nor a security issue.>
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
@@ -82,9 +70,9 @@ export default function RootLayout({
       </head>
       <ThemeProvider>
         <ToastProvider>
-          <Column as="body" fillWidth margin="0" padding="0">
+          <Column style={{ minHeight: "100vh" }} as="body" fillWidth margin="0" padding="0">
             <Background
-              position="absolute"
+              position="fixed"
               mask={{
                 x: effects.mask.x,
                 y: effects.mask.y,
@@ -124,7 +112,21 @@ export default function RootLayout({
                 color: effects.lines.color,
               }}
             />
-            {children}
+            <Flex fillWidth minHeight="16" hide="s"></Flex>
+            <Header />
+            <Flex
+              zIndex={0}
+              fillWidth
+              paddingY="l"
+              paddingX="l"
+              horizontal="center"
+              flex={1}
+            >
+              <Flex horizontal="center" fillWidth minHeight="0">
+                <RouteGuard>{children}</RouteGuard>
+              </Flex>
+            </Flex>
+            <Footer />
           </Column>
         </ToastProvider>
       </ThemeProvider>

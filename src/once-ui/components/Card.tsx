@@ -39,9 +39,6 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
           className={styles.card}
           onClick={onClick}
           {...rest}
-          style={{
-            ...style,
-          }}
         >
           {children}
         </Flex>

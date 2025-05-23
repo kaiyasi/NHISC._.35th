@@ -168,19 +168,10 @@ const DropdownWrapper = forwardRef<HTMLDivElement, DropdownWrapperProps>(
         }}
         className={className}
         ref={wrapperRef}
-        onClick={(e) => {
-          if (!isOpen) {
-            handleOpenChange(true);
-            return;
-          }
-
-          if (
-            closeAfterClick &&
-            dropdownRef.current &&
-            !dropdownRef.current.contains(e.target as Node)
-          ) {
-            handleOpenChange(false);
-          }
+        onClick={() => {
+            if (closeAfterClick) {
+                handleOpenChange(!isOpen);
+            }
         }}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -194,7 +185,7 @@ const DropdownWrapper = forwardRef<HTMLDivElement, DropdownWrapperProps>(
         aria-expanded={isOpen}
       >
         {trigger}
-        {isOpen && dropdown && (
+        {isOpen && (
           <Flex
             zIndex={1}
             className={styles.fadeIn}

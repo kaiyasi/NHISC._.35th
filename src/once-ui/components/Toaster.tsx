@@ -9,7 +9,7 @@ interface ToasterProps {
   toasts: {
     id: string;
     variant: "success" | "danger";
-    message: React.ReactNode;
+    message: string;
     action?: React.ReactNode;
   }[];
   removeToast: (id: string) => void;

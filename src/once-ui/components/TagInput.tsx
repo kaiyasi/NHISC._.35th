@@ -52,6 +52,7 @@ const TagInput = forwardRef<HTMLInputElement, TagInputProps>(
         ref={ref}
         label={label}
         placeholder={placeholder}
+        labelAsPlaceholder
         value={inputValue}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}

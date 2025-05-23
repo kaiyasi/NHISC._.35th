@@ -78,8 +78,7 @@ const Switch: React.FC<SwitchProps> = forwardRef<HTMLInputElement, SwitchProps>(
           className={commonStyles.hidden}
           tabIndex={-1}
         />
-        <Flex
-          cursor={disabled ? "not-allowed" : undefined}
+        <div
           className={classNames(styles.switch, {
             [styles.checked]: isChecked,
             [styles.disabled]: disabled,
@@ -95,8 +94,8 @@ const Switch: React.FC<SwitchProps> = forwardRef<HTMLInputElement, SwitchProps>(
           >
             {loading && <Spinner size="xs" />}
           </div>
-        </Flex>
-        {props.label && <InteractiveDetails disabled={disabled} {...props} onClick={() => {}} />}
+        </div>
+        {props.label && <InteractiveDetails {...props} onClick={() => {}} />}
       </Flex>
     );
   },
