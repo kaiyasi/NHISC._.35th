@@ -1,46 +1,44 @@
 ---
-title: Simple Guides for Fuwari
-published: 2024-04-01
-description: "How to use this blog template."
+title: Fuwari 簡單使用指南
+published: 2025-06-08
+description: "如何使用這個部落格模板。"
 image: "./cover.jpeg"
-tags: ["Fuwari", "Blogging", "Customization"]
-category: Guides
+tags: []
+category: 指南
 draft: false
 ---
 
-> Cover image source: [Source](https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/208fc754-890d-4adb-9753-2c963332675d/width=2048/01651-1456859105-(colour_1.5),girl,_Blue,yellow,green,cyan,purple,red,pink,_best,8k,UHD,masterpiece,male%20focus,%201boy,gloves,%20ponytail,%20long%20hair,.jpeg)
+> 封面圖片來源：[來源](https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/208fc754-890d-4adb-9753-2c963332675d/width=2048/01651-1456859105-(colour_1.5),girl,_Blue,yellow,green,cyan,purple,red,pink,_best,8k,UHD,masterpiece,male%20focus,%201boy,gloves,%20ponytail,%20long%20hair,.jpeg)
 
-This blog template is built with [Astro](https://astro.build/). For the things that are not mentioned in this guide, you may find the answers in the [Astro Docs](https://docs.astro.build/).
+這個部落格模板是使用 [Astro](https://astro.build/) 建立的。對於本指南中未提及的事項，您可以在 [Astro 文檔](https://docs.astro.build/) 中找到答案。
 
-## Front-matter of Posts
+## 文章的 Front-matter
 
 ```yaml
 ---
-title: My First Blog Post
+title: 我的第一篇部落格文章
 published: 2023-09-09
-description: This is the first post of my new Astro blog.
+description: 這是我新 Astro 部落格的第一篇文章。
 image: ./cover.jpg
 tags: [Foo, Bar]
-category: Front-end
+category: 前端
 draft: false
 ---
 ```
 
-| Attribute     | Description                                                                                                                                                                                                 |
-|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `title`       | The title of the post.                                                                                                                                                                                      |
-| `published`   | The date the post was published.                                                                                                                                                                            |
-| `description` | A short description of the post. Displayed on index page.                                                                                                                                                   |
-| `image`       | The cover image path of the post.<br/>1. Start with `http://` or `https://`: Use web image<br/>2. Start with `/`: For image in `public` dir<br/>3. With none of the prefixes: Relative to the markdown file |
-| `tags`        | The tags of the post.                                                                                                                                                                                       |
-| `category`    | The category of the post.                                                                                                                                                                                   |
-| `draft`        | If this post is still a draft, which won't be displayed.                                                                                                                                                    |
+| 屬性          | 描述                                                                                                                                                                                                     |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `title`       | 文章標題。                                                                                                                                                                                               |
+| `published`   | 文章發布日期。                                                                                                                                                                                           |
+| `description` | 文章的簡短描述。顯示在首頁上。                                                                                                                                                                           |
+| `image`       | 文章的封面圖片路徑。<br/>1. 以 `http://` 或 `https://` 開頭：使用網路圖片<br/>2. 以 `/` 開頭：使用 `public` 目錄中的圖片<br/>3. 不使用上述前綴：相對於 markdown 檔案的路徑                        |
+| `tags`        | 文章標籤。                                                                                                                                                                                               |
+| `category`    | 文章分類。                                                                                                                                                                                               |
+| `draft`       | 如果這篇文章仍是草稿，則不會顯示。                                                                                                                                                                       |
 
-## Where to Place the Post Files
+## 文章檔案放置位置
 
-
-
-Your post files should be placed in `src/content/posts/` directory. You can also create sub-directories to better organize your posts and assets.
+您的文章檔案應該放在 `src/content/posts/` 目錄中。您也可以建立子目錄來更好地組織您的文章和資源。
 
 ```
 src/content/posts/

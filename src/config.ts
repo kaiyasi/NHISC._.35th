@@ -7,15 +7,15 @@ import type {
 import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
-	title: "Fuwari",
-	subtitle: "Demo Site",
-	lang: "en", // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko', 'es', 'th'
+	title: "NHISC._.35th", // 網站標題
+	subtitle: "Club Website", // 網站副標題
+	lang: "zh-TW", // 設定網頁語言 選項:'en', 'zh_CN', 'zh_TW', 'ja', 'ko', 'es', 'th'
 	themeColor: {
-		hue: 250, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
-		fixed: false, // Hide the theme color picker for visitors
+		hue: 280, // 預設色調值，範圍從 0 到 360 下方 fixeed 開啟後 網站標題列會有畫盤可以選擇顏色
+		fixed: true, // 關閉主頁調色盤
 	},
 	banner: {
-		enable: false,
+		enable: false, // 打開會有問題
 		src: "assets/images/demo-banner.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
 		credit: {
@@ -26,54 +26,27 @@ export const siteConfig: SiteConfig = {
 	},
 	toc: {
 		enable: true, // Display the table of contents on the right side of the post
-		depth: 2, // Maximum heading depth to show in the table, from 1 to 3
+		depth: 3, // Maximum heading depth to show in the table, from 1 to 3
 	},
 	favicon: [
 		// Leave this array empty to use the default favicon
-		// {
-		//   src: '/favicon/icon.png',    // Path of the favicon, relative to the /public directory
-		//   theme: 'light',              // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
-		//   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
-		// }
+		{
+			src: "/favicon/icon.png", // 把社團logo放在這個資料夾中，取名為icon.png
+			theme: "light", // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
+			sizes: "32x32", // (Optional) Size of the favicon, set only if you have favicons of different sizes
+		},
 	],
 };
 
 export const navBarConfig: NavBarConfig = {
-	links: [
-		LinkPreset.Home,
-		LinkPreset.Archive,
-		LinkPreset.About,
-		{
-			name: "GitHub",
-			url: "https://github.com/saicaca/fuwari", // Internal links should not include the base path, as it is automatically added
-			external: true, // Show an external link icon and will open in a new tab
-		},
-	],
+	links: [LinkPreset.Home, LinkPreset.Archive, LinkPreset.About],
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "assets/images/demo-avatar.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-	name: "Lorem Ipsum",
-	bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-	links: [
-		{
-			name: "Twitter",
-			icon: "fa6-brands:twitter", // Visit https://icones.js.org/ for icon codes
-			// You will need to install the corresponding icon set if it's not already included
-			// `pnpm add @iconify-json/<icon-set-name>`
-			url: "https://twitter.com",
-		},
-		{
-			name: "Steam",
-			icon: "fa6-brands:steam",
-			url: "https://store.steampowered.com",
-		},
-		{
-			name: "GitHub",
-			icon: "fa6-brands:github",
-			url: "https://github.com/saicaca/fuwari",
-		},
-	],
+	avatar: "assets/images/demo-avatar.png", // 可以放你們的合照或社團logo
+	name: "NHISC._.35th", // 社團名稱
+	bio: "Stars can’t shine without darkness.", // 社團簡介
+	links: [],
 };
 
 export const licenseConfig: LicenseConfig = {
